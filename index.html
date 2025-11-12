@@ -273,25 +273,69 @@
     </footer>
 
     <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-QGIKjFKeaQ_1agZKJiiZg0ibA2FWq2Uy6lniB526dAr0SOyLEC-DMFE-QF01yU8GkQ/execRIPT'; 
+
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('associe-form');
             const formMessage = document.getElementById('form-message');
             
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
+            const showMessage = (message, isSuccess) => {
+                formMessage.textContent = message;
+                formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
                 
-                formMessage.textContent = 'Cadastro enviado com sucesso! (Simulação)';
-                formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
-                formMessage.classList.add('bg-green-100', 'text-green-700');
+                if (isSuccess) {
+                    formMessage.classList.add('bg-green-100', 'text-green-700');
+                } else {
+                    formMessage.classList.add('bg-red-100', 'text-red-700');
+                }
                 formMessage.classList.remove('hidden');
 
-                form.reset();
-                
+                // Ocultar a mensagem após 4 segundos
                 setTimeout(() => {
                     formMessage.classList.add('hidden');
-                }, 3000);
+                }, 4000);
+            }
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                
+                // Exibe uma mensagem de carregamento
+                showMessage('Enviando cadastro...', false); 
+                formMessage.classList.remove('bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+                formMessage.classList.add('bg-asp-light-yellow', 'text-asp-blue');
+
+                // Cria o objeto FormData e converte para URLSearchParams
+                const formData = new FormData(form);
+                const data = new URLSearchParams(formData);
+
+                try {
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: data
+                        // Não inclua Content-Type para permitir que o navegador use 'multipart/form-data' 
+                        // ou 'application/x-www-form-urlencoded', que é mais fácil para o Apps Script.
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                             showMessage('✅ Cadastro enviado com sucesso! Aguarde contato da Associação.', true);
+                             form.reset(); // Limpa o formulário apenas se o envio for bem-sucedido
+                        } else {
+                            // Trata erros retornados pelo Apps Script (result: 'error')
+                            showMessage(`❌ Erro no envio: ${result.message || 'Erro desconhecido.'}`, false);
+                        }
+                    } else {
+                        // Trata erros de rede ou status HTTP de erro
+                        showMessage(`❌ Erro de conexão: O servidor retornou o status ${response.status}.`, false);
+                    }
+                } catch (error) {
+                    console.error('Erro ao enviar o formulário:', error);
+                    showMessage('❌ Falha ao conectar. Verifique sua conexão e tente novamente.', false);
+                }
             });
 
+            // Lógica de menu móvel (mantida)
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             
