@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP-SEFAZ/TO – Home Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'asp-blue': '#003366',
+                        'asp-yellow': '#FFD700',
+                        'asp-gray': '#F2F2F2',
+                        'asp-light-yellow': '#FFF4D0',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900">
+    <!-- Chosen Palette: Associação Azul e Amarelo -->
+    <!-- Application Structure Plan: A SPA utiliza uma estrutura de "landing page" temática de rolagem única. A navegação principal (cabeçalho) usa links de âncora para mover o usuário para seções de conteúdo dedicadas (Quem Somos, Projetos, etc.). Esta estrutura foi escolhida por ser a mais intuitiva para consumir o conteúdo de um "site institucional", permitindo uma visão geral rápida (Hero) e um aprofundamento opcional rolando ou clicando. As interações principais são a rolagem de âncora e o preenchimento do formulário "Associe-se". -->
+    <!-- Visualization & Content Choices: 1. Quem Somos (Missão/Visão/Valores): Lista HTML/Tailwind para organizar e informar. 2. Projetos e Ações: Layout de cartões HTML/Tailwind para organizar e informar, com interações de 'hover' para engajamento. 3. Transparência: Grade de links HTML/Tailwind com ícones Unicode (📄, 💰, 📊, 📜) para fornecer acesso. 4. Notícias Recentes: Layout de grade estático (placeholders) HTML/Tailwind para simular um feed de notícias, cumprindo a estrutura do relatório. 5. Formulário Associe-se: Formulário HTML padrão para ação do usuário, com JS para 'preventDefault' no envio. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header id="inicio" class="bg-asp-blue text-white p-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
+        <div class="text-2xl font-bold">ASP-SEFAZ/TO</div>
+        
+        <nav class="hidden md:flex space-x-6 items-center">
+            <a href="#inicio" class="font-medium hover:text-asp-yellow transition-colors">Início</a>
+            <a href="#quem-somos" class="font-medium hover:text-asp-yellow transition-colors">Quem Somos</a>
+            <a href="#projetos" class="font-medium hover:text-asp-yellow transition-colors">Projetos</a>
+            <a href="#transparencia" class="font-medium hover:text-asp-yellow transition-colors">Transparência</a>
+            <a href="#noticias" class="font-medium hover:text-asp-yellow transition-colors">Notícias</a>
+            <a href="#contato" class="font-medium hover:text-asp-yellow transition-colors">Contato</a>
+        </nav>
+        
+        <a href="#associe-se" class="bg-asp-yellow text-asp-blue font-bold py-2 px-4 rounded-lg hover:bg-yellow-400 transition-colors hidden md:block">
+            Associe-se
+        </a>
+        
+        <button id="mobile-menu-btn" class="md:hidden text-white text-3xl">
+            &#9776; 
+        </button>
+    </header>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-asp-blue text-white flex-col items-center p-4 fixed top-16 left-0 right-0 z-40 shadow-lg">
+        <a href="#inicio" class="py-2 hover:text-asp-yellow transition-colors w-full text-center">Início</a>
+        <a href="#quem-somos" class="py-2 hover:text-asp-yellow transition-colors w-full text-center">Quem Somos</a>
+        <a href="#projetos" class="py-2 hover:text-asp-yellow transition-colors w-full text-center">Projetos</a>
+        <a href="#transparencia" class="py-2 hover:text-asp-yellow transition-colors w-full text-center">Transparência</a>
+        <a href="#noticias" class="py-2 hover:text-asp-yellow transition-colors w-full text-center">Notícias</a>
+        <a href="#contato" class="py-2 hover:text-asp-yellow transition-colors w-full text-center">Contato</a>
+        <a href="#associe-se" class="mt-4 bg-asp-yellow text-asp-blue font-bold py-2 px-4 rounded-lg hover:bg-yellow-400 transition-colors w-full text-center">
+            Associe-se
+        </a>
+    </div>
+
+    <main>
+        <section class="bg-white text-center py-20 lg:py-32 px-4 border-b-8 border-asp-yellow">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold text-asp-blue mb-6">
+                    Fortalecendo quem faz a Fazenda Pública acontecer
+                </h1>
+                <h3 class="text-xl md:text-2xl text-gray-700 mb-8">
+                    Associe-se, participe dos projetos e acompanhe as ações que valorizam os servidores.
+                </h3>
+                <a href="#associe-se" class="bg-asp-blue text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-blue-800 transition-colors">
+                    Associe-se Agora
+                </a>
+            </div>
+        </section>
+
+        <section id="quem-somos" class="bg-asp-gray py-16 lg:py-24 px-4">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+                <div class="rounded-lg overflow-hidden shadow-xl">
+                    <img src="https://placehold.co/600x400/003366/FFFFFF?text=ASP-SEFAZ/TO" alt="Servidores reunidos" class="w-full h-auto object-cover">
+                </div>
+                <div>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-asp-blue mb-6">Quem Somos</h2>
+                    <p class="text-gray-700 text-lg mb-6">
+                        A Associação dos Servidores Públicos da Secretaria da Fazenda do Tocantins – Araguaína e Região (ASP-SEFAZ/TO) é uma entidade sem fins lucrativos dedicada à valorização, defesa e integração dos servidores fazendários.
+                    </p>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <span class="font-bold text-asp-blue mr-2 text-xl">&#10148;</span> 
+                            <div><strong>Missão:</strong> Representar e valorizar o servidor público fazendário.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-bold text-asp-blue mr-2 text-xl">&#10148;</span> 
+                            <div><strong>Visão:</strong> Ser referência em gestão associativa e transparência institucional.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-bold text-asp-blue mr-2 text-xl">&#10148;</span> 
+                            <div><strong>Valores:</strong> Ética, União, Transparência, Comprometimento e Respeito.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="bg-white py-16 lg:py-24 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl lg:text-4xl font-bold text-asp-blue mb-12 text-center">Projetos e Ações</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-5xl mb-4 block">🧾</span>
+                        <h3 class="text-2xl font-bold text-asp-blue mb-3">Projeto Solidariedade Fiscal</h3>
+                        <p class="text-gray-700 mb-4">Mobilizações e ações sociais em prol da comunidade.</p>
+                        <a href="#" class="text-asp-blue font-bold hover:underline">Saiba Mais &rarr;</a>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-5xl mb-4 block">🎓</span>
+                        <h3 class="text-2xl font-bold text-asp-blue mb-3">Capacita-SEFAZ</h3>
+                        <p class="text-gray-700 mb-4">Cursos e treinamentos voltados ao aprimoramento profissional.</p>
+                        <a href="#" class="text-asp-blue font-bold hover:underline">Saiba Mais &rarr;</a>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-5xl mb-4 block">🤝</span>
+                        <h3 class="text-2xl font-bold text-asp-blue mb-3">Convênios e Benefícios</h3>
+                        <p class="text-gray-700 mb-4">Descontos, parcerias e vantagens para associados.</p>
+                        <a href="#" class="text-asp-blue font-bold hover:underline">Saiba Mais &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="transparencia" class="bg-asp-blue text-white py-16 lg:py-24 px-4">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-12">Transparência</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-12">
+                    <a href="#" class="bg-white/10 p-6 rounded-lg hover:bg-white/20 transition-colors flex flex-col items-center justify-center h-40">
+                        <span class="text-5xl block mb-3">📄</span>
+                        <span class="text-lg font-semibold">Atas e Deliberações</span>
+                    </a>
+                    <a href="#" class="bg-white/10 p-6 rounded-lg hover:bg-white/20 transition-colors flex flex-col items-center justify-center h-40">
+                        <span class="text-5xl block mb-3">💰</span>
+                        <span class="text-lg font-semibold">Balancetes e Relatórios</span>
+                    </a>
+                    <a href="#" class="bg-white/10 p-6 rounded-lg hover:bg-white/20 transition-colors flex flex-col items-center justify-center h-40">
+                        <span class="text-5xl block mb-3">📊</span>
+                        <span class="text-lg font-semibold">Projetos em Execução</span>
+                    </a>
+                    <a href="#" class="bg-white/10 p-6 rounded-lg hover:bg-white/20 transition-colors flex flex-col items-center justify-center h-40">
+                        <span class="text-5xl block mb-3">📜</span>
+                        <span class="text-lg font-semibold">Estatuto da Associação</span>
+                    </a>
+                </div>
+                <p class="text-2xl italic">Transparência é o nosso compromisso com cada associado.</p>
+            </div>
+        </section>
+
+        <section id="noticias" class="bg-white py-16 lg:py-24 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl lg:text-4xl font-bold text-asp-blue mb-12 text-center">Últimas Notícias e Comunicados</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/600x400/F2F2F2/333?text=Notícia+1" alt="Notícia 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-asp-blue mb-3">Nova parceria traz benefícios em educação</h3>
+                            <p class="text-gray-700 mb-4 line-clamp-3">Associados agora têm 20% de desconto em cursos de pós-graduação...</p>
+                            <a href="#" class="text-asp-blue font-bold hover:underline">Ler mais &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/600x400/F2F2F2/333?text=Notícia+2" alt="Notícia 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-asp-blue mb-3">ASP-SEFAZ/TO participa de debate</h3>
+                            <p class="text-gray-700 mb-4 line-clamp-3">Diretoria discute a valorização da carreira fazendária em evento estadual...</p>
+                            <a href="#" class="text-asp-blue font-bold hover:underline">Ler mais &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/600x400/F2F2F2/333?text=Notícia+3" alt="Notícia 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-asp-blue mb-3">Ação de Solidariedade arrecada fundos</h3>
+                            <p class="text-gray-700 mb-4 line-clamp-3">Projeto Solidariedade Fiscal entrega cestas básicas para comunidade...</p>
+                            <a href="#" class="text-asp-blue font-bold hover:underline">Ler mais &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="associe-se" class="bg-asp-light-yellow py-16 lg:py-24 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-200">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-asp-blue mb-4 text-center">Associe-se à ASP-SEFAZ/TO</h2>
+                    <p class="text-gray-700 text-lg text-center mb-8">Faça parte da nossa associação e fortaleça nossa categoria.</p>
+                    
+                    <form id="associe-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="nome" class="block text-sm font-medium text-gray-700">Nome completo *</label>
+                            <input type="text" id="nome" name="nome" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue">
+                        </div>
+                        <div>
+                            <label for="cpf" class="block text-sm font-medium text-gray-700">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue">
+                        </div>
+                        <div>
+                            <label for="matricula" class="block text-sm font-medium text-gray-700">Matrícula funcional</label>
+                            <input type="text" id="matricula" name="matricula" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="cargo" class="block text-sm font-medium text-gray-700">Cargo / Lotação</label>
+                            <input type="text" id="cargo" name="cargo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">E-mail *</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue">
+                        </div>
+                        <div>
+                            <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone / WhatsApp *</label>
+                            <input type="tel" id="telefone" name="telefone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="endereco" class="block text-sm font-medium text-gray-700">Endereço</label>
+                            <textarea id="endereco" name="endereco" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-asp-blue focus:ring-asp-blue"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="upload" class="block text-sm font-medium text-gray-700">Upload (comprovante funcional – opcional)</label>
+                            <input type="file" id="upload" name="upload" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-asp-blue file:text-white hover:file:bg-blue-800 cursor-pointer">
+                        </div>
+                        <div class="md:col-span-2 flex items-center">
+                            <input id="agreement" name="agreement" type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-asp-blue focus:ring-asp-blue">
+                            <label for="agreement" class="ml-2 block text-sm text-gray-900">Declaro que li e concordo com o Estatuto da Associação.</label>
+                        </div>
+                        <div class="md:col-span-2 text-center mt-4">
+                            <button type="submit" class="w-full md:w-auto bg-asp-blue text-white font-bold py-3 px-12 rounded-lg text-lg hover:bg-blue-800 transition-colors">
+                                Enviar Cadastro
+                            </button>
+                        </div>
+                    </form>
+                    <div id="form-message" class="hidden mt-6 text-center text-lg font-medium p-4 rounded-md"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contato" class="bg-asp-blue text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h4 class="font-bold text-lg mb-3">Contato</h4>
+                <p class="text-gray-300">contato@aspsefazto.org.br</p>
+                <p class="text-gray-300">WhatsApp: (63) 9XXXX-XXXX</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-3">Endereço</h4>
+                <p class="text-gray-300">Av. Jacuba, Quadra 06, Lote 19</p>
+                <p class="text-gray-300">Jardim Mônaco, Araguaína-TO</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-3">Redes Sociais</h4>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#" class="text-3xl hover:text-asp-yellow" title="Facebook">📘</a>
+                    <a href="#" class="text-3xl hover:text-asp-yellow" title="Instagram">📸</a>
+                    <a href="#" class="text-3xl hover:text-asp-yellow" title="WhatsApp">💬</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto text-center border-t border-white/20 mt-8 pt-8">
+            <p class="text-gray-300">© 2025 ASP-SEFAZ/TO – Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('associe-form');
+            const formMessage = document.getElementById('form-message');
+            
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                formMessage.textContent = 'Cadastro enviado com sucesso! (Simulação)';
+                formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+                formMessage.classList.add('bg-green-100', 'text-green-700');
+                formMessage.classList.remove('hidden');
+
+                form.reset();
+                
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 3000);
+            });
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+            
+            document.querySelectorAll('#mobile-menu a, main a[href^="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.closest('#mobile-menu')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
